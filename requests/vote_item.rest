@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/items/vote
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6IjYxZjA1NWZkNjM0YWNlM2RhZWRlYTRjNiIsImlhdCI6MTY0MzE0MTI0OX0.nS4otnizRQIpL5qkS-npTRkSOXLj2J8ifTthJzor3pY
+
+{
+    "itemId": "61f059382f604bb3f231d3eb",
+    "typeVote": "dislike"
+}
