@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator');
+//const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -20,10 +20,6 @@ const userSchema = new mongoose.Schema({
     minLength: 4
   },
   name: {type: String },
-  items :[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Item'
-    }],
   date_created: {
     type: Date,
     default: new Date()

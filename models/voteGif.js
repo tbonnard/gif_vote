@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const voteGifSchema = new mongoose.Schema({
     typeVote: {
         type: String,
-        default: "like"
+        default: "DuoGame"
       },
     voter: {
         type: mongoose.Schema.Types.ObjectId,
@@ -13,10 +13,18 @@ const voteGifSchema = new mongoose.Schema({
         type: String,
         required: true
       },
+    urlEmbeddedGif: {
+      type: String,
+      required: true
+    },
     date_created: {
         type: Date,
         default: new Date()
-      }
+      },
+    anonymous: {
+      type: Boolean,
+      default: false
+    }
 })
 
 voteGifSchema.set('toJSON', {
