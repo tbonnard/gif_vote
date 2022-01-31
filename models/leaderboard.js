@@ -1,18 +1,12 @@
 const mongoose = require('mongoose')
 
-const voteGifSchema = new mongoose.Schema({
+const leaderboardSchema = new mongoose.Schema({
     typeVote: {
         type: String,
         default: "DuoGame"
-      },
-    voter: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-        },
-    gifVoted: {
-        type: String,
-        required: true
-      },
+    },
+    GifId : {type: String, required:true},
+    GifTotalVote : {type: Number, default:1},
     urlEmbeddedGif: {
       type: String,
       required: true
@@ -21,14 +15,10 @@ const voteGifSchema = new mongoose.Schema({
         type: Date,
         default: new Date()
       },
-    anonymous: {
-      type: Boolean,
-      default: false
-    },
     gifCategory: {type: String}
 })
 
-voteGifSchema.set('toJSON', {
+leaderboardSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
       delete returnedObject._id
@@ -36,4 +26,4 @@ voteGifSchema.set('toJSON', {
     }
   })
 
-module.exports = mongoose.model('VoteGif', voteGifSchema)
+module.exports = mongoose.model('Leaderboard', leaderboardSchema)

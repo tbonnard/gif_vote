@@ -15,7 +15,7 @@ const VoteFame = new mongoose.Schema({
       type: String,
       required: true
     }
-})
+  })
 
 VoteFame.set('toJSON', {
     transform: (document, returnedObject) => {

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const VoteGif = require('../models/voteGif')
 const User = require('../models/user')
 const VoteFame = require('../models/voteFame')
-
+const Leaderboard = require('../models/leaderboard')
 
 votesGifRouter.get('/', async (request, response) => {
     const allVotes = await VoteGif.find({})
@@ -45,7 +45,7 @@ votesGifRouter.post('/challenge', async (request, response, next) =>{
             const newUserVoteFame = new VoteFame({
                 user:userVoterGif,
                 GifId:newVoteGif.gifVoted,
-                urlEmbeddedGif: body.gifUrl,
+                urlEmbeddedGif: body.gifUrl
             })
             await newUserVoteFame.save()
         }
@@ -72,18 +72,34 @@ votesGifRouter.post('/duo', async (request, response, next) =>{
                 voter: userVoterGif,
                 gifVoted:body.objectVotedDetails.gifVotedId,
                 anonymous:false,
-                urlEmbeddedGif:body.objectVotedDetails.gifUrl
+                urlEmbeddedGif:body.objectVotedDetails.gifUrl,
+                gifCategory: body.objectVotedDetails.gifCategory
             })
 
         } else {
             newVoteGif = new VoteGif({
                 gifVoted:body.objectVotedDetails.gifVotedId,
                 anonymous:true,
-                urlEmbeddedGif:body.objectVotedDetails.gifUrl
+                urlEmbeddedGif:body.objectVotedDetails.gifUrl,
+                gifCategory: body.objectVotedDetails.gifCategory
             })
         }
 
         const newVoteGifSaved = newVoteGif.save()
+
+        const leaderboardGif = await Leaderboard.findOne({GifId:body.objectVotedDetails.gifVotedId})
+        if (leaderboardGif) {
+            leaderboardGif.GifTotalVote +=1
+            await leaderboardGif.save()
+        } else {
+            const newLeaderboardGif = new Leaderboard({
+                GifId : body.objectVotedDetails.gifVotedId,
+                urlEmbeddedGif: body.objectVotedDetails.gifUrl,
+                gifCategory: body.objectVotedDetails.gifCategory
+            })
+            await newLeaderboardGif.save()
+        }
+
         response.json(newVoteGifSaved)
     }
     catch(exception) {
