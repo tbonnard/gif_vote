@@ -2,7 +2,7 @@ import fameServices from '../services/fame'
 
 export const initGetUserFame =() =>{
     return async dispatch => {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+        const loggedUserJSON = window.localStorage.getItem('loggedGifAppUser')
         if (loggedUserJSON) {
           const user = await JSON.parse(loggedUserJSON)
             const votesFame = await fameServices.getUserFame(user.token)

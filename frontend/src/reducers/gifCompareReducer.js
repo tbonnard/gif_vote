@@ -14,7 +14,7 @@ export const initializeGif = () => {
       let gif1;
       let gif2;
       try {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+        const loggedUserJSON = window.localStorage.getItem('loggedGifAppUser')
         if (loggedUserJSON) {
           const user = await JSON.parse(loggedUserJSON)
           const currentGifId = await usersServices.getCurrentGifId(user.token)

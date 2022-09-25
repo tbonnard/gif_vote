@@ -26,7 +26,7 @@ export const initializeGifDuo = () => {
 
   export const voteGif= (gif, category) => {
     return async dispatch => {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+      const loggedUserJSON = window.localStorage.getItem('loggedGifAppUser')
       let token = null
       if (loggedUserJSON) {
         const user = await JSON.parse(loggedUserJSON)

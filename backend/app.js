@@ -7,10 +7,11 @@ const mongoose = require('mongoose')
 
 const loginRouter = require('./controllers/login')
 const usersRouter = require('./controllers/user')
-// const itemsRouter = require('./controllers/item')
-const votesRouter = require('./controllers/vote')
+const votesGifRouter = require('./controllers/voteGif')
 const gifsRouter = require('./controllers/gif')
 const voteFameRouter = require('./controllers/voteFame')
+const leaderboardRouter = require('./controllers/leaderboard')
+
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -35,10 +36,10 @@ app.use(middleware.tokenExtractor)
 
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
-// app.use('/api/items', itemsRouter)
-app.use('/api/votes', votesRouter)
+app.use('/api/votesgif', votesGifRouter)
 app.use('/api/gifs', gifsRouter)
 app.use('/api/fame', voteFameRouter)
+app.use('/api/leaderboard', leaderboardRouter)
 
 
 app.get('/*', function (req, res) {

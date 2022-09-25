@@ -10,7 +10,7 @@ export const userLogin = (credentials, category) => {
     return async dispatch => {
         try {
             const user = await userServices.loginUser(credentials)
-            window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
+            window.localStorage.setItem('loggedGifAppUser', JSON.stringify(user))
             usersServices.setToken(user.token)
             votesGifService.setToken(user.token)
             dispatch(initGetUserFame())
@@ -32,7 +32,7 @@ export const createAccount = (accountObject) => {
             let user;
             if (newUser) {
                 user = await userServices.loginUser({username:accountObject.username, password:accountObject.password})
-                window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
+                window.localStorage.setItem('loggedGifAppUser', JSON.stringify(user))
                 usersServices.setToken(user.token)
                 votesGifService.setToken(user.token)
                 dispatch(initGetUserFame())
@@ -49,7 +49,7 @@ export const createAccount = (accountObject) => {
 
 export const getUserInfo = () =>{
     return async dispatch => {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+        const loggedUserJSON = window.localStorage.getItem('loggedGifAppUser')
         if (loggedUserJSON) {
         const user = await JSON.parse(loggedUserJSON)
         usersServices.setToken(user.token)
@@ -65,7 +65,7 @@ export const getUserInfo = () =>{
 
 export const logoutUser = () => {
     return async dispatch => {
-        window.localStorage.removeItem('loggedNoteappUser')
+        window.localStorage.removeItem('loggedGifAppUser')
         dispatch({
             type: "LOGOUT_USER",
             data: null
